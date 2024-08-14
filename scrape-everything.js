@@ -105,8 +105,9 @@ const ignoredDomainsRegex = /facebook\.com|linkedin\.com|youtube\.com|focus-news
       // Find new links to crawl
       const newLinks = [];
       $('a').each((index, element) => {
-        const href = $(element).attr('href');
-        if (href && href.startsWith('http')) {
+        let href = $(element).attr('href');
+        if (href) {
+          href = new URL(href, currentPageUrl).href;  // Convert to absolute URL
           const linkUrlObj = new URL(href);
           const linkHostname = linkUrlObj.hostname;
 
