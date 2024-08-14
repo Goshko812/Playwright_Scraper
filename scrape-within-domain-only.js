@@ -114,18 +114,25 @@ const ignoredDomainsRegex = /facebook\.com|linkedin\.com|youtube\.com|focus-news
       // Find new links to crawl
       const newLinks = [];
       $('a').each((index, element) => {
-        const href = $(element).attr('href');
-        if (href && href.startsWith('http')) {
+        let href = $(element).attr('href');
+        if (href) {
+          href = new URL(href, currentPageUrl).href;  // Convert to absolute URL
           const linkUrlObj = new URL(href);
           const linkHostname = linkUrlObj.hostname;
 
-          // Skip ignored domains and URLs outside the base domain
           if (!ignoredDomainsRegex.test(linkHostname) && linkHostname === baseDomain) {
             newLinks.push(href);
           }
         }
       });
       queue.push(...newLinks);
+
+      // Click on the "Next" button if present
+      try {
+        await page.click('selector-for-next-button');
+      } catch (clickError) {
+        console.log(`Next button not found on ${currentPageUrl} or error clicking it: ${clickError.message}`);
+      }
     } catch (error) {
       console.log(`Error loading or processing ${currentPageUrl}: ${error.message}`);
       continue; // Skip to the next URL
