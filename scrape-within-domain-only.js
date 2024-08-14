@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');  // For hashing filenames
-const url = require('url');
 
 const websiteUrl = 'https://www.tu-sofia.bg/';
 const outputDir = './output';
@@ -126,13 +125,7 @@ const ignoredDomainsRegex = /facebook\.com|linkedin\.com|youtube\.com|focus-news
         }
       });
       queue.push(...newLinks);
-
-      // Click on the "Next" button if present
-      try {
-        await page.click('selector-for-next-button');
-      } catch (clickError) {
-        console.log(`Next button not found on ${currentPageUrl} or error clicking it: ${clickError.message}`);
-      }
+      
     } catch (error) {
       console.log(`Error loading or processing ${currentPageUrl}: ${error.message}`);
       continue; // Skip to the next URL
