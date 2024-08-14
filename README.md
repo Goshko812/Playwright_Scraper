@@ -18,7 +18,11 @@ first install npm
 
 **Arch**
 
-`sudo pacman -Sy nodejs`
+```bash
+sudo pacman -Sy nodejs
+
+yay -S playwright
+```
 
 **Debian/Ubuntu**
 
