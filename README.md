@@ -1,5 +1,5 @@
 # Playwright_Scraper
-Playwright scraper and crawler
+Scraper and crawler built with Playwright and Cheerio
 
 # Versions and Differences
 
@@ -12,3 +12,35 @@ This pretty much lets the crawler to go wild (can't recommend)
 
 **Scrape Domain Scope only**
 Scrapes within the domain scope (worse BFS version as this goes in a straight line and doesn't scan everything)
+
+# Requirements
+first install npm 
+
+**Arch**
+
+`sudo pacman -Sy nodejs`
+
+**Debian/Ubuntu**
+
+```bash
+curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+
+sudo bash nodesource_setup.sh
+
+sudo apt install nodejs
+```
+
+
+Then install Playwright and the other dependencies
+
+```bash
+npm init playwright@latest
+
+npm install path
+
+npm install url
+
+npm install cheerio
+
+npm install fs
+```
